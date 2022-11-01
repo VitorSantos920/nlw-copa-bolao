@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Arquivo onde ficarão as tabelas do Banco de Dados
+// Automatiza o processo de gerenciamento de tabelas, colunas e relacionamentos do BD.
+// Sem necessidade de escrever os Statements SQL (como ALTER TABLE... etc).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Pool {
+  id        String   @id @default(cuid()) // Primary Key // Valor do 'id' como sendo String gerado automaticamente, com o cuid()
+  title     String
+  code      String   @unique
+  createdAt DateTime @default(now())
+}
